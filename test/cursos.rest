@@ -1,0 +1,24 @@
+GET http://localhost:444/api/cursos/getCursos HTTP/1.1
+
+###
+
+POST http://localhost:444/api/cursos/insertCurso  HTTP/1.1
+content-type: application/json
+
+{
+    "nombre": "Principios I"
+}
+
+###
+
+PUT http://localhost:444/api/cursos/updateCurso  HTTP/1.1
+content-type: application/json
+
+{
+    "id": "4ab7dfac-246a-4249-adac-d7f759a5534a",
+    "nombre": "Principios II"
+}
+
+###
+
+DELETE http://localhost:444/api/cursos/deleteCurso/4ab7dfac-246a-4249-adac-d7f759a5534a HTTP/1.1

@@ -1,0 +1,30 @@
+GET http://localhost:444/api/cursos-matriculados/getCursosMatriculados HTTP/1.1
+
+###
+
+POST http://localhost:444/api/cursos-matriculados/insertCursoMatriculado HTTP/1.1
+content-type: application/json
+
+{
+        "cedulaEst": "123456789",
+        "curso": "Principios I",
+        "ciclo": "I"
+
+
+}
+
+###
+
+PUT http://localhost:444/api/cursos-matriculados/updateCursoMatriculado  HTTP/1.1
+content-type: application/json
+
+{
+        "id": "9ff9beec-8ad4-49d3-be7e-3a630d7eea7c",
+        "cedulaEst": "123456789",
+        "curso": "Principios I",
+        "ciclo": "II"
+}
+
+###
+
+DELETE http://localhost:444/api/cursos-matriculados/deleteCursoMatriculado/9ff9beec-8ad4-49d3-be7e-3a630d7eea7c HTTP/1.1

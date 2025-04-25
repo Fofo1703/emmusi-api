@@ -1,0 +1,30 @@
+GET http://localhost:444/api/calificaciones/getCalificaciones HTTP/1.1
+
+###
+
+POST http://localhost:444/api/calificaciones/insertCalificacion  HTTP/1.1
+content-type: application/json
+
+{
+        "idCursoMatriculado": "9ff9beec-8ad4-49d3-be7e-3a630d7eea7c",
+        "nota": "75",
+        "estado": "Aprobado"
+
+}
+
+###
+
+PUT http://localhost:444/api/calificaciones/updateCalificacion  HTTP/1.1
+content-type: application/json
+
+{
+        "id": "42ee204c-cc87-4dfb-a64b-2f4b98d97be4",
+        "idCursoMatriculado": "9ff9beec-8ad4-49d3-be7e-3a630d7eea7c",
+        "nota": "65",
+        "estado": "Reprobado"
+
+}
+
+###
+
+DELETE http://localhost:444/api/calificaciones/deleteCalificacion/a649dcd3-23e1-4294-95ae-500707f73fd4 HTTP/1.1

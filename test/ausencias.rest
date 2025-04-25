@@ -1,0 +1,30 @@
+GET http://localhost:444/api/ausencias/getAusencias HTTP/1.1
+
+###
+
+POST http://localhost:444/api/ausencias/insertAusencia  HTTP/1.1
+content-type: application/json
+
+{
+        "idCursoMatriculado": "9ff9beec-8ad4-49d3-be7e-3a630d7eea7c",
+        "justificadas": 1,
+        "injustificadas": 1
+
+}
+
+###
+
+PUT http://localhost:444/api/ausencias/updateAusencia  HTTP/1.1
+content-type: application/json
+
+{
+        "id": "e195453e-30d3-4674-87f3-7742b0875f4b",
+        "idCursoMatriculado": "9ff9beec-8ad4-49d3-be7e-3a630d7eea7c",
+        "justificadas": 2,
+        "injustificadas": 2
+
+}
+
+###
+
+DELETE http://localhost:444/api/ausencias/deleteAusencia/e195453e-30d3-4674-87f3-7742b0875f4b HTTP/1.1

@@ -1,0 +1,24 @@
+GET http://localhost:444/api/profesores/getProfesores HTTP/1.1
+
+###
+
+POST http://localhost:444/api/profesores/insertProfesor  HTTP/1.1
+content-type: application/json
+
+{
+    "nombre": "Wilber Recinos"
+}
+
+###
+
+PUT http://localhost:444/api/profesores/updateProfesor  HTTP/1.1
+content-type: application/json
+
+{
+    "id": "6fa99cab-1628-4f61-8780-110546904a94",
+    "nombre": "Rodolfo Méndez"
+}
+
+###
+
+DELETE http://localhost:444/api/profesores/deleteProfesor/6fa99cab-1628-4f61-8780-110546904a94 HTTP/1.1

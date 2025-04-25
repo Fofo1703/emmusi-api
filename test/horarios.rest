@@ -1,0 +1,34 @@
+GET http://localhost:444/api/horarios/getHorarios HTTP/1.1
+
+###
+
+POST http://localhost:444/api/horarios/insertHorario  HTTP/1.1
+content-type: application/json
+
+{
+        "curso": "Principios I",
+        "profe": "Wilber Recinos",
+        "dia": "Lunes",
+        "horaInicio": "13:00.00",
+        "horaFin": "15:00.00",
+        "ciclo": "I"
+
+}
+###
+
+PUT http://localhost:444/api/horarios/updateHorario  HTTP/1.1
+content-type: application/json
+
+{
+        "id": "3bde0aaf-0fed-4be8-8815-d9e86aafe832",
+        "curso": "Principios I",
+        "profe": "Wilber Recinos",
+        "dia": "Lunes",
+        "horaInicio": "14:00",
+        "horaFin": "16:00",
+        "ciclo": "II"
+}
+
+###
+
+DELETE http://localhost:444/api/horarios/deleteHorario/3bde0aaf-0fed-4be8-8815-d9e86aafe832 HTTP/1.1
