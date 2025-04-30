@@ -44,6 +44,10 @@ export const insertProfesor = async (req, res) => {
         const { data, error } = await supabase.from('Profesores').insert([profesor]);
 
         if (error) {
+            if (error.code === '23505') {
+                // Si el numero de ceduala ya existe en la base de datos, devuelve el mensaje 6
+                return res.status(400).json({ message: 'Este profesor ya se encuentra registrado' });
+            }
 
             res.status(400).json({ message: Mensajes(4) });
         } else {
