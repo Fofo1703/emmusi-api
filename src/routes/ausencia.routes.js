@@ -4,7 +4,7 @@ import { getAusencias, insertAusencia, updateAusencia, deleteAusencia } from "..
 
 router.get("/getAusencias", getAusencias);
 router.post("/insertAusencia", insertAusencia);
-router.put("/updateAusencia", updateAusencia);
+router.put("/updateAusencia/:id", updateAusencia);
 router.delete("/deleteAusencia/:id", deleteAusencia);
 
 module.exports.routes = router;

@@ -16,14 +16,13 @@ content-type: application/json
 }
 ###
 
-PUT http://localhost:444/api/horarios/updateHorario  HTTP/1.1
+PUT http://localhost:444/api/horarios/updateHorario/4921bd55-295e-40a1-8df1-885ec23cb13e  HTTP/1.1
 content-type: application/json
 
 {
-        "id": "3bde0aaf-0fed-4be8-8815-d9e86aafe832",
-        "curso": "Principios I",
-        "profe": "Wilber Recinos",
-        "dia": "Lunes",
+        "curso": "Principios II",
+        "profe": "Pochonclo",
+        "dia": "Martes",
         "horaInicio": "14:00",
         "horaFin": "16:00",
         "ciclo": "II"

@@ -11,12 +11,11 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:444/api/profesores/updateProfesor  HTTP/1.1
+PUT http://localhost:444/api/profesores/updateProfesor/ed51ee37-6d6a-43eb-93fc-06043f82d91d  HTTP/1.1
 content-type: application/json
 
 {
-    "id": "6fa99cab-1628-4f61-8780-110546904a94",
-    "nombre": "Rodolfo Méndez"
+    "nombre": "Daniel Chong"
 }
 
 ###

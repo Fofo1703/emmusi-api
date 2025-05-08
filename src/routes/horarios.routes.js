@@ -4,7 +4,7 @@ import { getHorarios, insertHorario, updateHorario, deleteHorario } from "../con
 
 router.get("/getHorarios", getHorarios);
 router.post("/insertHorario", insertHorario);
-router.put("/updateHorario", updateHorario);
+router.put("/updateHorario/:id", updateHorario);
 router.delete("/deleteHorario/:id", deleteHorario);
 
 module.exports.routes = router;

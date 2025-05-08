@@ -26,6 +26,32 @@ export const getEstudiantes = async (req, res) => {
     }
 };
 
+export const getEstudiante = async (req, res) => {
+    try {
+        // throw new Error("Simulación de fallo en el método");
+        // Se obtienen los registros desde la base de datos
+        const { id } = req.params;
+        const { data: estudiantes, error } = await supabase.from('Estudiantes').select('*').eq('id', id);
+
+        if (error) {
+            // Si ocurre un error al llamar al servidor, devuelve el mensaje 4
+            return res.status(500).json({ message: Mensajes(4) });
+        }
+
+        if (estudiantes && estudiantes.length > 0) {
+            // Si hay registros, se retornan
+            res.status(200).json(estudiantes);
+        } else {
+            // Si no se encontraron registros, devuelve el mensaje 2
+            res.status(404).json({ message: Mensajes(2) });
+        }
+
+    } catch (error) {
+        // Si el método falla devuelve el mensaje 5
+        res.status(500).json({ message: Mensajes(5) });
+    }
+        }
+
 export const insertEstudiante = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
@@ -62,8 +88,8 @@ export const insertEstudiante = async (req, res) => {
 export const updateEstudiante = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-
-        const { id,cedula, nombre, telefono, especialidad, subespecialidad } = req.body;
+        const { id } = req.params; 
+        const { cedula, nombre, telefono, especialidad, subespecialidad } = req.body;
         const estudiante = { id, cedula, nombre, telefono, especialidad, subespecialidad };
         
 

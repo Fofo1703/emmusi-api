@@ -56,8 +56,8 @@ export const insertCursoMatriculado = async (req, res) => {
 export const updateCursoMatriculado = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-
-        const { id, cedulaEst, curso, ciclo } = req.body;
+        const { id } = req.params; 
+        const { cedulaEst, curso, ciclo } = req.body;
         const cursoMatriculado = { id, cedulaEst, curso, ciclo };
         
 

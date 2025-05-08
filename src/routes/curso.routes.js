@@ -4,7 +4,7 @@ import { getCursos, insertCursos, updateCursos, deleteCursos } from "../controll
 
 router.get("/getCursos", getCursos);
 router.post("/insertCurso", insertCursos);
-router.put("/updateCurso", updateCursos);
+router.put("/updateCurso/:id", updateCursos);
 router.delete("/deleteCurso/:id", deleteCursos);
 
 module.exports.routes = router;

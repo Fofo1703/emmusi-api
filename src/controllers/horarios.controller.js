@@ -32,7 +32,8 @@ export const insertHorario = async (req, res) => {
         // Crea el horario
         const { curso, profe, dia, horaInicio, horaFin, ciclo } = req.body;
         const horario = { curso, profe, dia, horaInicio, horaFin, ciclo };
-
+        console.log(horario.curso);
+        
         // Validación de campos requeridos
         if (!horario.curso || !horario.profe || !horario.dia || !horario.horaInicio || !horario.horaFin || !horario.ciclo) {
             return res.status(400).json({ message: Mensajes(1) });
@@ -57,8 +58,8 @@ export const insertHorario = async (req, res) => {
 export const updateHorario = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-
-        const { id, curso, profe, dia, horaInicio, horaFin, ciclo } = req.body;
+        const { id } = req.params; 
+        const { curso, profe, dia, horaInicio, horaFin, ciclo } = req.body;
         const horario = { id, curso, profe, dia, horaInicio, horaFin, ciclo };
         
 

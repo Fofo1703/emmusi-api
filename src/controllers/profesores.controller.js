@@ -63,8 +63,8 @@ export const insertProfesor = async (req, res) => {
 export const updateProfesor = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
- 
-        const { id, nombre } = req.body;
+        const { id } = req.params; 
+        const { nombre } = req.body;
         const profesor = { id, nombre };
         
         

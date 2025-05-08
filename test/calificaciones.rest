@@ -6,7 +6,7 @@ POST http://localhost:444/api/calificaciones/insertCalificacion  HTTP/1.1
 content-type: application/json
 
 {
-        "idCursoMatriculado": "9ff9beec-8ad4-49d3-be7e-3a630d7eea7c",
+        "idCursoMatriculado": "9fab6b40-94f2-4532-a489-3a01f5af3ca6",
         "nota": "75",
         "estado": "Aprobado"
 
@@ -14,12 +14,11 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:444/api/calificaciones/updateCalificacion  HTTP/1.1
+PUT http://localhost:444/api/calificaciones/updateCalificacion/6fa84039-fb1d-432e-bfd0-baa2b967dbce  HTTP/1.1
 content-type: application/json
 
 {
-        "id": "42ee204c-cc87-4dfb-a64b-2f4b98d97be4",
-        "idCursoMatriculado": "9ff9beec-8ad4-49d3-be7e-3a630d7eea7c",
+        "idCursoMatriculado": "9fab6b40-94f2-4532-a489-3a01f5af3ca6",
         "nota": "65",
         "estado": "Reprobado"
 

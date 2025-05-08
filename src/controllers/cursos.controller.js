@@ -59,8 +59,8 @@ export const insertCursos = async (req, res) => {
 export const updateCursos = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
- 
-        const { id, nombre } = req.body;
+        const { id } = req.params; 
+        const { nombre } = req.body;
         const cursos = { id, nombre };
         
         

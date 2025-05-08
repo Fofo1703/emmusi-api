@@ -4,7 +4,7 @@ import { getCursosMatriculados, insertCursoMatriculado, updateCursoMatriculado, 
 
 router.get("/getCursosMatriculados", getCursosMatriculados);
 router.post("/insertCursoMatriculado", insertCursoMatriculado);
-router.put("/updateCursoMatriculado", updateCursoMatriculado);
+router.put("/updateCursoMatriculado/:id", updateCursoMatriculado);
 router.delete("/deleteCursoMatriculado/:id", deleteCursoMatriculado);
 
 module.exports.routes = router;

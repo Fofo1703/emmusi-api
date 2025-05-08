@@ -4,7 +4,7 @@ import { getProfesores, insertProfesor, updateProfesor, deleteProfesor } from ".
 
 router.get("/getProfesores", getProfesores);
 router.post("/insertProfesor", insertProfesor);
-router.put("/updateProfesor", updateProfesor);
+router.put("/updateProfesor/:id", updateProfesor);
 router.delete("/deleteProfesor/:id", deleteProfesor);
 
 module.exports.routes = router;

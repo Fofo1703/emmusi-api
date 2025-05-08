@@ -57,8 +57,8 @@ export const insertCalificacion = async (req, res) => {
 export const updateCalificacion = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-
-        const { id, idCursoMatriculado, nota, estado } = req.body;
+        const { id } = req.params; 
+        const { idCursoMatriculado, nota, estado } = req.body;
         const calificacion = { id, idCursoMatriculado, nota, estado };
         
 

@@ -11,11 +11,10 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:444/api/cursos/updateCurso  HTTP/1.1
+PUT http://localhost:444/api/cursos/updateCurso/e66e6297-a41c-41ed-a5dd-bae9b2665beb  HTTP/1.1
 content-type: application/json
 
 {
-    "id": "4ab7dfac-246a-4249-adac-d7f759a5534a",
     "nombre": "Principios II"
 }
 

@@ -57,8 +57,8 @@ export const insertAusencia = async (req, res) => {
 export const updateAusencia = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-
-        const { id, idCursoMatriculado, justificadas, injustificadas } = req.body;
+        const { id } = req.params; 
+        const { idCursoMatriculado, justificadas, injustificadas } = req.body;
         const ausencia = { id, idCursoMatriculado, justificadas, injustificadas };
         
         if (!ausencia.id || !ausencia.idCursoMatriculado || !ausencia.justificadas || !ausencia.injustificadas) {

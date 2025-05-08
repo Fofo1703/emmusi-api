@@ -4,7 +4,7 @@ import { getCalificaciones, insertCalificacion, updateCalificacion, deleteCalifi
 
 router.get("/getCalificaciones", getCalificaciones);
 router.post("/insertCalificacion", insertCalificacion);
-router.put("/updateCalificacion", updateCalificacion);
+router.put("/updateCalificacion/:id", updateCalificacion);
 router.delete("/deleteCalificacion/:id", deleteCalificacion);
 
 module.exports.routes = router;
