@@ -6,7 +6,7 @@ POST http://localhost:444/api/ausencias/insertAusencia  HTTP/1.1
 content-type: application/json
 
 {
-        "idCursoMatriculado": "9fab6b40-94f2-4532-a489-3a01f5af3ca6",
+        "idCursoMatriculado": "d74dd718-1691-4257-a539-fd95d6f9efa9",
         "justificadas": 1,
         "injustificadas": 1
 
@@ -14,15 +14,13 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:444/api/ausencias/updateAusencia/baa10d8b-45a3-4ca0-8cd7-6f592934f5cb  HTTP/1.1
+PUT http://localhost:444/api/ausencias/updateAusencia/1fc7d8c4-85a5-43e4-82aa-b5a703ef66b1  HTTP/1.1
 content-type: application/json
 
 {
-
-        "idCursoMatriculado": "9fab6b40-94f2-4532-a489-3a01f5af3ca6",
+        "idCursoMatriculado": "d74dd718-1691-4257-a539-fd95d6f9efa9",
         "justificadas": 2,
         "injustificadas": 2
-
 }
 
 ###

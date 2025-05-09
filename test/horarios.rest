@@ -6,8 +6,8 @@ POST http://localhost:444/api/horarios/insertHorario  HTTP/1.1
 content-type: application/json
 
 {
-        "curso": "Principios I",
-        "profe": "Wilber Recinos",
+        "idCurso": "84a946c9-83b5-417b-9b54-ad1a0f15afd5",
+        "idProfesor": "662e8a39-6f19-4c37-94b3-5d3b79e80352",
         "dia": "Lunes",
         "horaInicio": "13:00.00",
         "horaFin": "15:00.00",
@@ -16,12 +16,12 @@ content-type: application/json
 }
 ###
 
-PUT http://localhost:444/api/horarios/updateHorario/4921bd55-295e-40a1-8df1-885ec23cb13e  HTTP/1.1
+PUT http://localhost:444/api/horarios/updateHorario/2c8e9891-ad46-4b89-b285-a6c82a1bf313  HTTP/1.1
 content-type: application/json
 
 {
-        "curso": "Principios II",
-        "profe": "Pochonclo",
+        "idCurso": "84a946c9-83b5-417b-9b54-ad1a0f15afd5",
+        "idProfesor": "662e8a39-6f19-4c37-94b3-5d3b79e80352",
         "dia": "Martes",
         "horaInicio": "14:00",
         "horaFin": "16:00",

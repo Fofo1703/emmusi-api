@@ -11,7 +11,7 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:444/api/cursos/updateCurso/e66e6297-a41c-41ed-a5dd-bae9b2665beb  HTTP/1.1
+PUT http://localhost:444/api/cursos/updateCurso/84a946c9-83b5-417b-9b54-ad1a0f15afd5  HTTP/1.1
 content-type: application/json
 
 {

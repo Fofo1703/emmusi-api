@@ -2,7 +2,7 @@ GET http://localhost:444/api/estudiantes/getEstudiantes HTTP/1.1
 
 ###
 
-GET http://localhost:444/api/estudiantes/getEstudiante/eeca4887-11cc-48db-8853-d42ba156c955 HTTP/1.1
+GET http://localhost:444/api/estudiantes/getEstudiante/61a1653c-d776-432c-b59b-f71749fd6acc HTTP/1.1
 
 ###
 
@@ -20,13 +20,13 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:444/api/estudiantes/updateEstudiante/eeca4887-11cc-48db-8853-d42ba156c955  HTTP/1.1
+PUT http://localhost:444/api/estudiantes/updateEstudiante/61a1653c-d776-432c-b59b-f71749fd6acc  HTTP/1.1
 content-type: application/json
 
 {
 
         "cedula": "123456789",
-        "nombre": "Rodolfo ",
+        "nombre": "Rodolfo Méndez",
         "telefono": "44444444",
         "especialidad": "Música",
         "subespecialidad": "Piano"
@@ -35,4 +35,4 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:444/api/estudiantes/deleteEstudiante/5a470466-8a1d-4f33-a66f-f41b6386e761 HTTP/1.1
+DELETE http://localhost:444/api/estudiantes/deleteEstudiante/61a1653c-d776-432c-b59b-f71749fd6acc HTTP/1.1

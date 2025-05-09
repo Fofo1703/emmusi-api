@@ -6,22 +6,20 @@ POST http://localhost:444/api/cursos-matriculados/insertCursoMatriculado HTTP/1.
 content-type: application/json
 
 {
-        "cedulaEst": "123456789",
-        "curso": "Principios I",
-        "ciclo": "I"
-
-
+        "idEstudiante": "61a1653c-d776-432c-b59b-f71749fd6acc",
+        "idCurso": "84a946c9-83b5-417b-9b54-ad1a0f15afd5",
+        "ciclo": "I-2024"
 }
 
 ###
 
-PUT http://localhost:444/api/cursos-matriculados/updateCursoMatriculado/9fab6b40-94f2-4532-a489-3a01f5af3ca6  HTTP/1.1
+PUT http://localhost:444/api/cursos-matriculados/updateCursoMatriculado/d74dd718-1691-4257-a539-fd95d6f9efa9  HTTP/1.1
 content-type: application/json
 
 {
-        "cedulaEst": "123456789",
-        "curso": "Principios II",
-        "ciclo": "II"
+        "idEstudiante": "61a1653c-d776-432c-b59b-f71749fd6acc",
+        "idCurso": "84a946c9-83b5-417b-9b54-ad1a0f15afd5",
+        "ciclo": "I-2025"
 }
 
 ###

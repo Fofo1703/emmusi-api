@@ -50,7 +50,7 @@ export const getEstudiante = async (req, res) => {
         // Si el método falla devuelve el mensaje 5
         res.status(500).json({ message: Mensajes(5) });
     }
-        }
+}
 
 export const insertEstudiante = async (req, res) => {
     try {
@@ -72,7 +72,7 @@ export const insertEstudiante = async (req, res) => {
                 // Si el numero de ceduala ya existe en la base de datos, devuelve el mensaje 6
                 return res.status(400).json({ message: Mensajes(6) });
             }
-            
+
             res.status(400).json({ message: Mensajes(4) });
         } else {
             // Si el registro es exitoso, devuelve el mensaje 3
@@ -88,30 +88,28 @@ export const insertEstudiante = async (req, res) => {
 export const updateEstudiante = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-        const { id } = req.params; 
+        const { id } = req.params;
         const { cedula, nombre, telefono, especialidad, subespecialidad } = req.body;
         const estudiante = { id, cedula, nombre, telefono, especialidad, subespecialidad };
-        
 
-        if (!estudiante.id ||!estudiante.cedula || !estudiante.nombre || !estudiante.telefono || !estudiante.especialidad || !estudiante.subespecialidad) {
+        if (!estudiante.id || !estudiante.cedula || !estudiante.nombre || !estudiante.telefono || !estudiante.especialidad || !estudiante.subespecialidad) {
             return res.status(400).json({ message: Mensajes(1) });
         }
 
         // Se actualiza el registro en la base de datos
-        const { error } = await supabase
+        const { data, error } = await supabase
             .from('Estudiantes').update([estudiante])
-            .eq('id', estudiante.id); // Actualizar el registro basado en el id
-
+            .eq('id', estudiante.id)
+            .select(); // Agregamos .select() para obtener los registros afectados
 
         if (error) {
-            if (error.code === '23505') {
-                return res.status(400).json({ message: Mensajes(6) });
-            }
-            
-            res.status(400).json({ message: Mensajes(4) });
-            
+            return res.status(500).json({ message: Mensajes(4) });
+        }
+
+        if (data.length > 0) {
+            return res.status(200).json({ message: Mensajes(3) });
         } else {
-            res.status(200).json({ message: Mensajes(3) });
+            return res.status(404).json({ message: 'No se encontró el registro a actualizar' });
         }
 
     } catch (error) {
@@ -122,7 +120,7 @@ export const updateEstudiante = async (req, res) => {
 export const deleteEstudiante = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-        const { id } = req.params; 
+        const { id } = req.params;
 
         if (!id) {
             return res.status(400).json({ message: Mensajes(1) });

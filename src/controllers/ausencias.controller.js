@@ -5,7 +5,8 @@ export const getAusencias = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
         // Se obtienen los registros desde la base de datos
-        const { data: ausencias, error } = await supabase.from('Ausencias').select('*');
+        const { data: ausencias, error } = await supabase.from('Ausencias')
+            .select('id, CursosMatriculados (Estudiantes ( nombre ), Cursos ( nombre ), ciclo), justificadas, injustificadas');
 
         if (error) {
             // Si ocurre un error al llamar al servidor, devuelve el mensaje 4
@@ -13,8 +14,16 @@ export const getAusencias = async (req, res) => {
         }
 
         if (ausencias && ausencias.length > 0) {
+            const datosFormateados = ausencias.map(aus => ({
+                id: aus.id,
+                estudiante: aus.CursosMatriculados.Estudiantes.nombre,
+                curso: aus.CursosMatriculados.Cursos.nombre,
+                ciclo: aus.CursosMatriculados.ciclo,
+                justificadas: aus.justificadas,
+                injustificadas: aus.injustificadas
+            }))
             // Si hay registros, se retornan
-            res.status(200).json(ausencias);
+            res.status(200).json(datosFormateados);
         } else {
             // Si no se encontraron registros, devuelve el mensaje 2
             res.status(404).json({ message: Mensajes(2) });
@@ -57,23 +66,29 @@ export const insertAusencia = async (req, res) => {
 export const updateAusencia = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-        const { id } = req.params; 
+        const { id } = req.params;
         const { idCursoMatriculado, justificadas, injustificadas } = req.body;
         const ausencia = { id, idCursoMatriculado, justificadas, injustificadas };
-        
+
         if (!ausencia.id || !ausencia.idCursoMatriculado || !ausencia.justificadas || !ausencia.injustificadas) {
             return res.status(400).json({ message: Mensajes(1) });
         }
 
         // Se actualiza el registro en la base de datos
-        const { error } = await supabase
-            .from('Ausencias').update([ausencia])
-            .eq('id', ausencia.id); // Actualizar el registro basado en el id
+        const { data, error } = await supabase
+            .from('Ausencias')
+            .update({ idCursoMatriculado, justificadas, injustificadas })
+            .eq('id', id)
+            .select(); // Agregamos .select() para obtener los registros afectados
 
         if (error) {
-            res.status(500).json({ message: Mensajes(4) });
+            return res.status(500).json({ message: Mensajes(4) });
+        }
+
+        if (data.length > 0) {
+            return res.status(200).json({ message: Mensajes(3) });
         } else {
-            res.status(200).json({ message: Mensajes(3) });
+            return res.status(404).json({ message: 'No se encontró el registro a actualizar' });
         }
 
     } catch (error) {
@@ -84,7 +99,7 @@ export const updateAusencia = async (req, res) => {
 export const deleteAusencia = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-        const { id } = req.params; 
+        const { id } = req.params;
 
         if (!id) {
             return res.status(400).json({ message: Mensajes(1) });
