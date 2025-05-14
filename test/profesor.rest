@@ -2,6 +2,10 @@ GET http://localhost:444/api/profesores/getProfesores HTTP/1.1
 
 ###
 
+GET http://localhost:444/api/profesores/getProfesor/662e8a39-6f19-4c37-94b3-5d3b79e80352 HTTP/1.1
+
+###
+
 POST http://localhost:444/api/profesores/insertProfesor  HTTP/1.1
 content-type: application/json
 

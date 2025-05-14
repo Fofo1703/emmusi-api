@@ -2,6 +2,11 @@ GET http://localhost:444/api/cursos/getCursos HTTP/1.1
 
 ###
 
+GET http://localhost:444/api/cursos/getCurso/84a946c9-83b5-417b-9b54-ad1a0f15afd5 HTTP/1.1
+    
+
+###
+
 POST http://localhost:444/api/cursos/insertCurso  HTTP/1.1
 content-type: application/json
 

@@ -2,6 +2,10 @@ GET http://localhost:444/api/horarios/getHorarios HTTP/1.1
 
 ###
 
+GET http://localhost:444/api/horarios/getHorario/2c8e9891-ad46-4b89-b285-a6c82a1bf312 HTTP/1.1
+
+###
+
 POST http://localhost:444/api/horarios/insertHorario  HTTP/1.1
 content-type: application/json
 
@@ -9,14 +13,14 @@ content-type: application/json
         "idCurso": "84a946c9-83b5-417b-9b54-ad1a0f15afd5",
         "idProfesor": "662e8a39-6f19-4c37-94b3-5d3b79e80352",
         "dia": "Lunes",
-        "horaInicio": "13:00.00",
-        "horaFin": "15:00.00",
+        "horaInicio": "13:00",
+        "horaFin": "15:00",
         "ciclo": "I"
 
 }
 ###
 
-PUT http://localhost:444/api/horarios/updateHorario/2c8e9891-ad46-4b89-b285-a6c82a1bf313  HTTP/1.1
+PUT http://localhost:444/api/horarios/updateHorario/2c8e9891-ad46-4b89-b285-a6c82a1bf312  HTTP/1.1
 content-type: application/json
 
 {
@@ -30,4 +34,4 @@ content-type: application/json
 
 ###
 
-DELETE http://localhost:444/api/horarios/deleteHorario/3bde0aaf-0fed-4be8-8815-d9e86aafe832 HTTP/1.1
+DELETE http://localhost:444/api/horarios/deleteHorario/9cdd3190-dbaf-42fa-a4af-5f5457f70deb HTTP/1.1
