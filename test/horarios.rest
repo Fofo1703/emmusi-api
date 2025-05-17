@@ -2,7 +2,11 @@ GET http://localhost:444/api/horarios/getHorarios HTTP/1.1
 
 ###
 
-GET http://localhost:444/api/horarios/getHorario/2c8e9891-ad46-4b89-b285-a6c82a1bf312 HTTP/1.1
+GET http://localhost:444/api/horarios/getHorario/b65faa18-f9c0-4d84-b16f-76c81b9fd14c HTTP/1.1
+
+###
+
+GET http://localhost:444/api/horarios/getHorariosPorCurso/a41e7a2e-6b5c-40da-ab0b-988a76e6ee18 HTTP/1.1
 
 ###
 

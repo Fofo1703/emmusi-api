@@ -4,10 +4,11 @@ import { Mensajes } from './messages.js'
 export const getCursosMatriculados = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
+        const { id } = req.params;
         // Se obtienen los registros desde la base de datos
         const { data: cursosMatriculados, error } = await supabase
             .from('CursosMatriculados')
-            .select(`id, Estudiantes ( nombre ), Cursos ( nombre ), ciclo `);
+            .select(`id, Cursos ( nombre ), Horarios (dia, horaInicio, horaFin, Profesores ( nombre )), ciclo, nota`).eq('idEstudiante', id);
 
         if (error) {
             // Si ocurre un error al llamar al servidor, devuelve el mensaje 4
@@ -15,12 +16,22 @@ export const getCursosMatriculados = async (req, res) => {
         }
 
         if (cursosMatriculados && cursosMatriculados.length > 0) {
-            const datosFormateados = cursosMatriculados.map(cm => ({
-                id: cm.id,
-                estudiante: cm.Estudiantes.nombre,
-                curso: cm.Cursos.nombre,
-                ciclo: cm.ciclo,
-            }));
+            const datosFormateados = cursosMatriculados.map(cm => {
+                const tieneNotaEspecial = cm.nota && cm.nota.trim() !== "";
+
+                return {
+                    id: cm.id,
+                    curso: cm.Cursos.nombre,
+                    horario: tieneNotaEspecial
+                        ? cm.nota
+                        : `${cm.Horarios.dia} ${cm.Horarios.horaInicio}-${cm.Horarios.horaFin}`,
+                    profesor: tieneNotaEspecial
+                        ? ""
+                        : cm.Horarios.Profesores.nombre,
+                    ciclo: cm.ciclo,
+                };
+            });
+
             // Si hay registros, se retornan
             res.status(200).json(datosFormateados);
         } else {
@@ -66,11 +77,11 @@ export const insertCursoMatriculado = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
         // Crea el curso matriculado
-        const { idEstudiante, idCurso, ciclo } = req.body;
-        const cursoMatriculado = { idEstudiante, idCurso, ciclo };
+        const { idEstudiante, idCurso, idHorario, ciclo, nota, estado } = req.body;
+        const cursoMatriculado = { idEstudiante, idCurso, idHorario, ciclo, nota, estado };
 
         // Validación de campos requeridos
-        if (!cursoMatriculado.idEstudiante || !cursoMatriculado.idCurso || !cursoMatriculado.ciclo) {
+        if (!cursoMatriculado.idEstudiante || !cursoMatriculado.idCurso || !cursoMatriculado.idHorario || !cursoMatriculado.ciclo) {
             return res.status(400).json({ message: Mensajes(1) });
         }
 
@@ -79,7 +90,6 @@ export const insertCursoMatriculado = async (req, res) => {
 
         if (error) {
             console.log(error);
-
             res.status(400).json({ message: Mensajes(4) });
         } else {
             // Si el registro es exitoso, devuelve el mensaje 3
@@ -95,15 +105,15 @@ export const updateCursoMatriculado = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
         const { id } = req.params;
-        const { idEstudiante, idCurso, ciclo } = req.body;
-        const cursoMatriculado = { id, idEstudiante, idCurso, ciclo };
-        
-        if (!cursoMatriculado.id || !cursoMatriculado.idEstudiante || !cursoMatriculado.idCurso || !cursoMatriculado.ciclo) {
+        const { idEstudiante, idCurso, idHorario, ciclo, nota, estado } = req.body;
+        const cursoMatriculado = { id, idEstudiante, idCurso, idHorario, ciclo, nota, estado };
+
+        if (!cursoMatriculado.id || !cursoMatriculado.idEstudiante || !cursoMatriculado.idCurso || !cursoMatriculado.idHorario || !cursoMatriculado.ciclo || !cursoMatriculado.nota || !cursoMatriculado.estado) {
             return res.status(400).json({ message: Mensajes(1) });
         }
 
         // Se actualiza el registro en la base de datos
-        const { data,error } = await supabase
+        const { data, error } = await supabase
             .from('CursosMatriculados').update([cursoMatriculado])
             .eq('id', cursoMatriculado.id)
             .select(); // Agregamos .select() para obtener los registros afectados

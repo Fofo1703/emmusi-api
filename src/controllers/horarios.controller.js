@@ -39,7 +39,7 @@ export const getHorarios = async (req, res) => {
 export const getHorario = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
-        // Se obtienen los registros desde la base de datos
+
         const { id } = req.params;
         const { data: horario, error } = await supabase.from('Horarios').select('*').eq('id', id);
 
@@ -106,35 +106,6 @@ export const insertHorario = async (req, res) => {
     }
 };
 
-
-// export const insertHorario = async (req, res) => {
-//     try {
-//         // throw new Error("Simulación de fallo en el método");
-//         // Crea el horario
-//         const { idCurso, idProfesor, dia, horaInicio, horaFin, ciclo } = req.body;
-//         const horario = { idCurso, idProfesor, dia, horaInicio, horaFin, ciclo };
-
-//         // Validación de campos requeridos
-//         if (!horario.idCurso || !horario.idProfesor || !horario.dia || !horario.horaInicio || !horario.horaFin || !horario.ciclo) {
-//             return res.status(400).json({ message: Mensajes(1) });
-//         }
-
-//         // Se registra el horario en la base de datos
-//         const { data, error } = await supabase.from('Horarios').insert([horario]);
-
-//         if (error) {
-//             res.status(400).json({ message: Mensajes(4) });
-//         } else {
-//             // Si el registro es exitoso, devuelve el mensaje 3
-//             res.status(201).json({ message: Mensajes(3) });
-//         }
-//     } catch (error) {
-//         // Si el método falla, devuelve el mensaje 5
-//         res.status(500).json({ message: Mensajes(5) });
-//     }
-// };
-
-
 export const updateHorario = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
@@ -194,6 +165,38 @@ export const deleteHorario = async (req, res) => {
     }
 };
 
+
+export const getHorariosPorCurso = async (req, res) => {
+    try {
+        // throw new Error("Simulación de fallo en el método");
+        const { id } = req.params;
+
+        const { data: horarios, error } = await supabase
+            .from('Horarios').select('id, dia , horaInicio, horaFin, ciclo, Profesores(nombre)').eq('idCurso', id);
+
+        if (error) {
+            // Si ocurre un error al llamar al servidor, devuelve el mensaje 4
+            return res.status(500).json({ message: Mensajes(4) });
+        }
+
+        if (horarios && horarios.length > 0) {
+            const datosFormateados = horarios.map(cm => ({
+                id: cm.id,
+                nombre: `${cm.dia} ${cm.horaInicio} a ${cm.horaFin} - ${cm.Profesores.nombre}`,
+                ciclo: cm.ciclo,
+            }));
+            // Si hay registros, se retornan
+            res.status(200).json(datosFormateados);
+        } else {
+            // Si no se encontraron registros, devuelve el mensaje 2
+            res.status(404).json({ message: Mensajes(2) });
+        }
+
+    } catch (error) {
+        // Si el método falla devuelve el mensaje 5
+        res.status(500).json({ message: Mensajes(5) });
+    }
+};
 
 
 
