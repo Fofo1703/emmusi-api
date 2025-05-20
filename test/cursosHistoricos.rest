@@ -1,0 +1,26 @@
+GET http://localhost:444/api/cursos-historicos/getCursosHistoricos HTTP/1.1
+
+###
+
+POST http://localhost:444/api/cursos-historicos/insertCursoHistorico/ffbc2b95-3350-49f0-877c-95b519ed616e  HTTP/1.1
+content-type: application/json
+
+{
+
+}
+
+###
+
+PUT http://localhost:444/api/cursos-historicos/updateCursoHistorico/d22eb9d5-ce1d-4497-ae42-81595b80475d  HTTP/1.1
+content-type: application/json
+
+{
+        "idCursoMatriculado": "d74dd718-1691-4257-a539-fd95d6f9efa9",
+        "nota": "65",
+        "estado": "Reprobado"
+
+}
+
+###
+
+DELETE http://localhost:444/api/cursos-historicos/deleteCursoHistorico/a649dcd3-23e1-4294-95ae-500707f73fd4 HTTP/1.1

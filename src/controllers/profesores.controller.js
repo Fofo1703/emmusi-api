@@ -71,7 +71,7 @@ export const insertProfesor = async (req, res) => {
 
         if (error) {
             if (error.code === '23505') {
-                // Si el numero de ceduala ya existe en la base de datos, devuelve el mensaje 6
+                // Si el nombre del profesor ya existe en la base de datos, devuelve el mensaje 
                 return res.status(400).json({ message: 'Este profesor ya se encuentra registrado' });
             }
 

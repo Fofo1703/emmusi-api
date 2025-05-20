@@ -79,6 +79,11 @@ export const insertCursoMatriculado = async (req, res) => {
         // Crea el curso matriculado
         const { idEstudiante, idCurso, idHorario, ciclo, nota, estado } = req.body;
         const cursoMatriculado = { idEstudiante, idCurso, idHorario, ciclo, nota, estado };
+        if (nota === "Retiro Justificado" || nota === "No Oferta") {
+            cursoMatriculado.estado = "Reprobado";
+        } else {
+            cursoMatriculado.nota = null;
+        }
 
         // Validación de campos requeridos
         if (!cursoMatriculado.idEstudiante || !cursoMatriculado.idCurso || !cursoMatriculado.idHorario || !cursoMatriculado.ciclo) {
@@ -89,13 +94,14 @@ export const insertCursoMatriculado = async (req, res) => {
         const { data, error } = await supabase.from('CursosMatriculados').insert([cursoMatriculado]);
 
         if (error) {
-            console.log(error);
             res.status(400).json({ message: Mensajes(4) });
         } else {
             // Si el registro es exitoso, devuelve el mensaje 3
             res.status(201).json({ message: Mensajes(3) });
         }
     } catch (error) {
+        console.log(error);
+
         res.status(500).json({ message: Mensajes(5) });
     }
 };
@@ -132,6 +138,48 @@ export const updateCursoMatriculado = async (req, res) => {
         res.status(500).json({ message: Mensajes(5) });
     }
 };
+
+export const agregarNota = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nota } = req.body;
+        let estado = "Reprobado";
+
+        // Validación básica
+        if (!id || !nota) {
+            return res.status(400).json({ message: Mensajes(1) });
+        }
+
+        if (!isNaN(nota) && Number(nota) >= 70 && Number(nota) <= 100) {
+            estado = "Aprobado";
+        } else if (["Retiro Justificado", "No Oferta"].includes(nota.trim())) {
+            estado = "Reprobado";
+        }
+
+        // Se actualiza solo la nota en la base de datos
+        const { data, error } = await supabase
+            .from('CursosMatriculados')
+            .update({ nota, estado })
+            .eq('id', id)
+            .select(); // Agregamos .select() para obtener los registros afectados
+
+        if (error) {
+            return res.status(400).json({ message: Mensajes(4) });
+        }
+
+        if (data.length > 0) {
+            return res.status(200).json({ message: Mensajes(3) });
+        } else {
+            return res.status(404).json({ message: 'No se encontró el registro a actualizar' });
+        }
+
+    } catch (error) {
+        console.log(error);
+        
+        res.status(500).json({ message: Mensajes(5) });
+    }
+};
+
 
 export const deleteCursoMatriculado = async (req, res) => {
     try {
