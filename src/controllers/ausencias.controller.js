@@ -3,39 +3,38 @@ import { Mensajes } from './messages.js'
 
 export const getAusencias = async (req, res) => {
     try {
-        // throw new Error("Simulación de fallo en el método");
-        // Se obtienen los registros desde la base de datos
-        const { data: ausencias, error } = await supabase.from('Ausencias')
-            .select('id, CursosMatriculados (Estudiantes ( nombre ), Cursos ( nombre ), ciclo), justificadas, injustificadas');
+        const { id } = req.params;
+
+        const { data: ausencias, error } = await supabase
+            .from('CursosMatriculados')
+            .select(`id, Cursos ( nombre ), ciclo, nota, justificadas, injustificadas`).eq('idEstudiante', id);
 
         if (error) {
-            // Si ocurre un error al llamar al servidor, devuelve el mensaje 4
-            return res.status(500).json({ message: Mensajes(4) });
+            return res.status(400).json({ message: Mensajes(4) });
         }
 
         if (ausencias && ausencias.length > 0) {
-            const datosFormateados = ausencias.map(aus => ({
-                id: aus.id,
-                estudiante: aus.CursosMatriculados.Estudiantes.nombre,
-                curso: aus.CursosMatriculados.Cursos.nombre,
-                ciclo: aus.CursosMatriculados.ciclo,
-                justificadas: aus.justificadas,
-                injustificadas: aus.injustificadas
-            }))
-            // Si hay registros, se retornan
-            res.status(200).json(datosFormateados);
+
+            const datosFormateados = ausencias.map(cal => ({
+                id: cal.id,
+                curso: cal.Cursos.nombre,
+                ciclo: cal.ciclo,
+                nota: cal.nota,
+                justificadas: cal.justificadas,
+                injustificadas: cal.injustificadas
+            }));
+             res.status(200).json(datosFormateados);
         } else {
-            // Si no se encontraron registros, devuelve el mensaje 2
             res.status(404).json({ message: Mensajes(2) });
         }
 
     } catch (error) {
-        // Si el método falla devuelve el mensaje 5
         res.status(500).json({ message: Mensajes(5) });
     }
 };
 
-export const getAusencia= async (req, res) => {
+
+export const getAusencia = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
         // Se obtienen los registros desde la base de datos
@@ -77,7 +76,11 @@ export const insertAusencia = async (req, res) => {
         const { data, error } = await supabase.from('Ausencias').insert([ausencia]);
 
         if (error) {
-            // Si ocurre un error al registrar, devuelve el mensaje 4
+            if (error.code === '23505') {
+                // Si el numero de ceduala ya existe en la base de datos, devuelve el mensaje 6
+                return res.status(400).json({ message: "Las ausencias ya se encuentran registradas" });
+            }
+
             res.status(400).json({ message: Mensajes(4) });
         } else {
             // Si el registro es exitoso, devuelve el mensaje 3

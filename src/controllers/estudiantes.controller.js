@@ -103,7 +103,12 @@ export const updateEstudiante = async (req, res) => {
             .select(); // Agregamos .select() para obtener los registros afectados
 
         if (error) {
-            return res.status(500).json({ message: Mensajes(4) });
+             if (error.code === '23505') {
+                // Si el numero de ceduala ya existe en la base de datos, devuelve el mensaje 6
+                return res.status(400).json({ message: Mensajes(6) });
+            }
+
+            res.status(400).json({ message: Mensajes(4) });
         }
 
         if (data.length > 0) {

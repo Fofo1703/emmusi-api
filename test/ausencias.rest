@@ -1,4 +1,4 @@
-GET http://localhost:444/api/ausencias/getAusencias HTTP/1.1
+GET http://localhost:444/api/ausencias/getAusencias/322c7db4-5c86-41c3-8876-9c6e80fa92c5 HTTP/1.1
 
 ###
 
@@ -6,9 +6,9 @@ POST http://localhost:444/api/ausencias/insertAusencia  HTTP/1.1
 content-type: application/json
 
 {
-        "idCursoMatriculado": "d74dd718-1691-4257-a539-fd95d6f9efa9",
-        "justificadas": 1,
-        "injustificadas": 1
+        "idCursoMatriculado": "d639384d-e31b-4138-ad29-6b7f7450f218",
+        "justificadas": 4,
+        "injustificadas": 4
 
 }
 

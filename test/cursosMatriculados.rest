@@ -2,7 +2,7 @@ GET http://localhost:444/api/cursos-matriculados/getCursosMatriculados/322c7db4-
 
 ###
 
-GET http://localhost:444/api/cursos-matriculados/getCursoMatriculado/6eca30d8-9246-4bdf-b419-3488fe9c98e0 HTTP/1.1
+GET http://localhost:444/api/cursos-matriculados/getCursoMatriculado/80e84105-11f9-4ad1-84c2-089da2b9a7db HTTP/1.1
 
 ###
 

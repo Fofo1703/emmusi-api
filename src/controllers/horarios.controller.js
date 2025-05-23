@@ -143,21 +143,26 @@ export const deleteHorario = async (req, res) => {
     try {
         // throw new Error("Simulación de fallo en el método");
         const { id } = req.params;
-
+        console.log(id);
+        
         if (!id) {
             return res.status(400).json({ message: Mensajes(1) });
         }
 
         // Se elimina el registro de la base de datos
-        const { error } = await supabase
+        const { data, error } = await supabase
             .from('Horarios')
             .delete()
-            .eq('id', id); // Eliminar basado en el id
+            .eq('id', id).select(); // Eliminar basado en el id
 
         if (error) {
-            res.status(500).json({ message: Mensajes(4) });
+            return res.status(500).json({ message: Mensajes(4) });
+        }
+
+        if (data.length > 0) {
+            return res.status(200).json({ message: Mensajes(3) });
         } else {
-            res.status(200).json({ message: Mensajes(3) });
+            return res.status(404).json({ message: 'No se encontró el registro a eliminar' });
         }
 
     } catch (error) {

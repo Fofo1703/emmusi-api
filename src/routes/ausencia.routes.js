@@ -2,7 +2,7 @@ import { Router } from "express";
 const router = Router();
 import { getAusencias, getAusencia, insertAusencia, updateAusencia, deleteAusencia } from "../controllers/ausencias.controller";
 
-router.get("/getAusencias", getAusencias);
+router.get("/getAusencias/:id", getAusencias);
 router.get("/getAusencia/:id", getAusencia);
 router.post("/insertAusencia", insertAusencia);
 router.put("/updateAusencia/:id", updateAusencia);
